@@ -1,0 +1,8 @@
+# Ignore the config file containing the API key
+config.js
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/

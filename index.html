@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETHER | Atmospheric Environment & Weather</title>
+    <link rel="icon" type="image/png" href="/assets/AETHER_Logo.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/weather.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+    <div class="background-container"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="logo-area">
+                <img src="assets/AETHER_Logo.png" alt="AETHER Logo" class="logo-img">
+                <span class="app-name">AETHER</span>
+            </div>
+            <div class="search-area">
+                <input type="text" id="search-input" class="clean-search" placeholder="Search City...">
+            </div>
+            <div class="header-controls">
+                <button id="btn-unit" class="btn-toggle" aria-label="Toggle Unit">℃</button>
+                <button id="btn-theme" class="btn-toggle" aria-label="Toggle Theme">
+                    <span class="theme-icon">☀️</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="content-area">
+            <!-- TAB 1: TODAY -->
+            <div id="tab-today" class="tab-content active">
+                <!-- 1. Current Weather -->
+                <section class="section-current">
+                    <div class="current-header">
+                        <h2 id="city-name">--</h2>
+                        <button id="btn-fav-add" class="btn-star">☆</button>
+                    </div>
+                    <div class="current-datetime">
+                        <span id="current-date">--</span>
+                        <span class="datetime-separator">•</span>
+                        <span id="current-time">--</span>
+                    </div>
+                    <div class="current-main">
+                        <img id="current-icon" src="" alt="" class="weather-icon-xl">
+                        <div id="current-temp" class="temp-xl">--°</div>
+                    </div>
+                    <div class="weather-details-infographic">
+                        <div class="detail-info-card">
+                            <span class="detail-label">Feels Like</span>
+                            <div class="detail-visual">🌡️</div>
+                            <span class="detail-value" id="detail-feels">--°</span>
+                        </div>
+                        <div class="detail-info-card">
+                            <span class="detail-label">Wind</span>
+                            <div class="detail-visual">💨</div>
+                            <span class="detail-value" id="detail-wind-speed">-- m/s</span>
+                            <span class="detail-value" id="detail-wind-dir" style="font-size: 0.7rem;">--</span>
+                        </div>
+                        <div class="detail-info-card">
+                            <span class="detail-label">Humidity</span>
+                            <div class="detail-visual">💧</div>
+                            <span class="detail-value" id="detail-humidity">--%</span>
+                        </div>
+                        <div class="detail-info-card">
+                            <span class="detail-label">AQI</span>
+                            <div class="aqi-dot"></div>
+                            <span class="detail-value" id="detail-aqi">--</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. Hourly Forecast -->
+                <section class="section-hourly">
+                    <h3>Hourly Forecast</h3>
+                    <div id="hourly-scroll"></div>
+                </section>
+
+                <!-- 3. 5-Day Trend (1-column) -->
+                <section class="section-trend">
+                    <div class="card-trend">
+                        <h3>5-Day Trend</h3>
+                        <div class="trend-graph-container">
+                            <canvas id="trendGraph"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. 5-Day Forecast (1-column) -->
+                <section class="section-forecast">
+                    <div class="card-forecast">
+                        <h3>5-Day Forecast</h3>
+                        <div id="daily-list" class="daily-list"></div>
+                    </div>
+                </section>
+
+                <!-- 5. Lifestyle -->
+                <section class="section-lifestyle">
+                    <h3>Lifestyle</h3>
+                    <div class="lifestyle-grid-detailed">
+                        <div class="life-card-detailed">
+                            <span class="life-label">Humidity</span>
+                            <div class="gauge-circular">
+                                <div class="gauge-fill" id="gauge-humidity-fill"></div>
+                                <div class="gauge-value" id="life-humidity">--%</div>
+                            </div>
+                        </div>
+                        <div class="life-card-detailed">
+                            <span class="life-label">Wind</span>
+                            <div class="gauge-compass">
+                                <div class="compass-arrow" id="compass-arrow">➤</div>
+                                <div class="compass-direction" id="compass-direction">--</div>
+                            </div>
+                            <div class="wind-speed-bar">
+                                <div class="wind-speed-fill" id="wind-speed-fill"></div>
+                            </div>
+                            <span class="compass-value" id="life-wind-speed">--</span>
+                        </div>
+                        <div class="life-card-detailed">
+                            <span class="life-label">UV Index</span>
+                            <div class="gauge-semicircle">
+                                <div class="gauge-arc-fill" id="gauge-uv-fill"></div>
+                            </div>
+                            <span class="life-value" id="life-uv">--</span>
+                        </div>
+                        <div class="life-card-detailed">
+                            <span class="life-label">Pressure</span>
+                            <div class="chart-bar-container">
+                                <div class="chart-bar-fill" id="bar-pressure"></div>
+                            </div>
+                            <span class="bar-value" id="life-pressure">--</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. Map & Outfit -->
+                <section class="section-map-outfit grid-2">
+                    <div class="card-map">
+                        <h3>Weather Map</h3>
+                        <div id="map-container" class="map-placeholder">Map Loading...</div>
+                    </div>
+                    <div class="card-outfit">
+                        <h3>Outfit Guide</h3>
+                        <div class="outfit-content">
+                            <div id="outfit-icon" class="outfit-icon-xxl">👕</div>
+                            <div id="outfit-text">Loading...</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. Cities -->
+                <section class="section-cities grid-2">
+                    <div class="card-cities">
+                        <h3>Global Cities</h3>
+                        <div id="list-global" class="city-list"></div>
+                    </div>
+                    <div class="card-cities">
+                        <h3>Domestic Cities</h3>
+                        <div id="list-domestic" class="city-list"></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB 2: SKYVIEW -->
+            <div id="tab-skyview" class="tab-content hidden">
+                <section class="sky-card">
+                    <h3>Sun Schedule</h3>
+                    <div class="sun-animation-container">
+                        <div class="sun-arc-path"></div>
+                        <div id="sun-body" class="sun-body"></div>
+                        <div class="sun-times">
+                            <span id="time-sunrise">--:--</span>
+                            <span id="time-sunset">--:--</span>
+                        </div>
+                    </div>
+                </section>
+                <section class="sky-card">
+                    <h3>Moon Phase</h3>
+                    <div class="moon-container">
+                        <div id="moon-visual" class="moon-visual"></div>
+                        <div class="moon-info">
+                            <span id="moon-phase-name">--</span>
+                            <span id="moon-illumination">--%</span>
+                            <span id="moon-days-info">--</span>
+                        </div>
+                    </div>
+                </section>
+                <section class="sky-card">
+                    <h3>Constellations</h3>
+                    <div class="constellation-box">
+                        <canvas id="constellationCanvas" width="300" height="200"></canvas>
+                        <span class="overlay-name">Ursa Major</span>
+                    </div>
+                </section>
+                <section class="sky-card">
+                    <h3>Meteor Showers</h3>
+                    <div class="meteor-animation-box">
+                        <canvas id="meteorCanvas" width="300" height="200"></canvas>
+                    </div>
+                    <div id="meteor-info"></div>
+                </section>
+            </div>
+
+            <!-- TAB 3: FAVORITES -->
+            <div id="tab-favorites" class="tab-content hidden">
+                <h2>My Locations</h2>
+                <div id="favorites-list" class="favorites-grid"></div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-tab="today">
+                <span class="nav-icon">☀</span>
+                <span class="nav-label">Today</span>
+            </button>
+            <button class="nav-item" data-tab="skyview">
+                <span class="nav-icon">★</span>
+                <span class="nav-label">Skyview</span>
+            </button>
+            <button class="nav-item" data-tab="favorites">
+                <span class="nav-icon">♥</span>
+                <span class="nav-label">Favorites</span>
+            </button>
+        </nav>
+    </div>
+
+    <script type="module" src="/script.js"></script>
+</body>
+
+</html>

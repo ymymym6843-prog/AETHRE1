@@ -1,0 +1,689 @@
+/* =========================================
+   AETHER - Weather Component Styles
+   ========================================= */
+
+/* --- Grid Utilities --- */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+/* --- Section 1: Current Weather --- */
+.section-current {
+    padding: var(--spacing-lg);
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.current-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.current-datetime {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.datetime-separator {
+    opacity: 0.5;
+}
+
+.btn-star {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s;
+}
+
+.btn-star.active {
+    color: #f1c40f;
+}
+
+.current-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.weather-icon-xl {
+    width: 100px;
+    height: 100px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.temp-xl {
+    font-family: var(--font-display);
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 1;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Current Weather Infographics */
+.weather-details-infographic {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    background: var(--bg-glass-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-glass);
+}
+
+.detail-info-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.detail-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.detail-visual {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Feels Like - Temperature Bar */
+.temp-bar-container {
+    width: 40px;
+    height: 24px;
+    background: linear-gradient(to right, #3498db, #e74c3c);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.temp-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    transition: width 0.5s;
+}
+
+/* Wind - Mini Compass */
+.wind-compass-mini {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--border-glass);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.wind-arrow-mini {
+    font-size: 1.2rem;
+    transition: transform 0.5s;
+}
+
+/* Humidity - Water Drop */
+.humidity-drop {
+    width: 24px;
+    height: 32px;
+    background: var(--border-glass);
+    border-radius: 12px 12px 0 0;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+
+.humidity-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #3498db;
+    transition: height 0.5s;
+}
+
+/* AQI - Color Bar */
+.aqi-bar {
+    width: 40px;
+    height: 8px;
+    border-radius: 4px;
+    background: #2ecc71;
+    transition: background-color 0.5s;
+}
+
+.aqi-bar.good {
+    background: #2ecc71;
+}
+
+.aqi-bar.moderate {
+    background: #f1c40f;
+}
+
+.aqi-bar.unhealthy {
+    background: #e67e22;
+}
+
+.aqi-bar.very-unhealthy {
+    background: #e74c3c;
+}
+
+.aqi-bar.hazardous {
+    background: #9b59b6;
+}
+
+/* --- Section 2: Hourly Forecast --- */
+.section-hourly {
+    background: var(--bg-glass-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-glass);
+}
+
+.horizontal-scroll {
+    display: flex;
+    gap: var(--spacing-md);
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.hourly-card {
+    flex: 0 0 auto;
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.hourly-time {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.hourly-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.hourly-temp {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.precip-drop {
+    width: 20px;
+    height: 24px;
+    background: var(--border-glass);
+    border-radius: 10px 10px 0 0;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+
+.precip-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #3498db;
+    transition: height 0.3s;
+}
+
+.precip-text {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+/* --- Section 3: 5-Day Trend & Forecast --- */
+.section-trend-forecast {
+    margin-bottom: var(--spacing-md);
+}
+
+.card-trend,
+.card-forecast {
+    background: var(--bg-glass-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-glass);
+}
+
+.daily-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.daily-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.daily-day {
+    width: 40px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.daily-weather-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.daily-temp {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.daily-precip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: #3498db;
+}
+
+/* --- Section 4: Lifestyle --- */
+.section-lifestyle {
+    background: var(--bg-glass-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-glass);
+}
+
+.lifestyle-grid-horizontal {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+}
+
+.life-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.life-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.life-value {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Humidity - Circular Gauge */
+.gauge-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--border-glass);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fill-water {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #3498db;
+    opacity: 0.6;
+    transition: height 0.8s;
+}
+
+.gauge-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+/* Wind - Compass */
+.compass {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--text-secondary);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.compass::before {
+    content: 'N';
+    position: absolute;
+    top: 4px;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.arrow {
+    width: 40px;
+    height: 3px;
+    background: var(--accent-color);
+    position: absolute;
+    transform-origin: center;
+    transition: transform 0.8s;
+}
+
+.arrow::after {
+    content: '→';
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    font-size: 1rem;
+    color: var(--accent-color);
+}
+
+/* UV - Semi-circular Gauge */
+.gauge-arc {
+    width: 80px;
+    height: 40px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    background: var(--border-glass);
+    position: relative;
+    overflow: hidden;
+}
+
+.fill-arc {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #2ecc71, #f1c40f, #e67e22, #e74c3c, #9b59b6);
+    transform-origin: bottom center;
+    transform: rotate(-180deg);
+    transition: transform 0.8s;
+}
+
+/* Pressure - Bar Chart */
+.bar-container {
+    width: 80px;
+    height: 10px;
+    background: var(--border-glass);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.fill-bar {
+    height: 100%;
+    background: var(--accent-color);
+    width: 0%;
+    transition: width 0.8s;
+}
+
+/* --- Section 5: Map & Outfit --- */
+.section-map-outfit {
+    margin-bottom: var(--spacing-md);
+}
+
+.card-map,
+.card-outfit {
+    background: var(--bg-glass-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-glass);
+}
+
+.outfit-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    height: 100%;
+    text-align: center;
+    min-height: 180px;
+}
+
+.outfit-icon-xxl {
+    font-size: 5rem;
+}
+
+.outfit-text {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* --- Section 6: Cities --- */
+.section-cities {
+    margin-bottom: var(--spacing-md);
+}
+
+.card-cities {
+    background: var(--bg-glass-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-glass);
+}
+
+.city-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.city-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.city-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.city-weather-icon {
+    width: 28px;
+    height: 28px;
+}
+
+.city-temp {
+    font-weight: 600;
+}
+
+/* --- Skyview Styles --- */
+.sky-card {
+    background: var(--bg-glass-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-glass);
+    margin-bottom: var(--spacing-md);
+}
+
+.sun-animation-container {
+    height: 140px;
+    position: relative;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.sun-arc-path {
+    width: 240px;
+    height: 120px;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-bottom: none;
+    border-radius: 120px 120px 0 0;
+    position: absolute;
+    bottom: 20px;
+}
+
+.sun-body {
+    width: 24px;
+    height: 24px;
+    background: #f1c40f;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #f1c40f;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    margin-left: -12px;
+    margin-bottom: -12px;
+    transition: all 1s;
+    z-index: 2;
+}
+
+.sun-times {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.moon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 10px;
+}
+
+.moon-visual {
+    width: 80px;
+    height: 80px;
+    background: #333;
+    border-radius: 50%;
+    box-shadow: inset -10px 0 20px rgba(0, 0, 0, 0.8);
+    position: relative;
+}
+
+.moon-visual::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: inset 10px 0 10px #f1c40f;
+    opacity: 0;
+}
+
+.moon-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.moon-days {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.constellation-box {
+    position: relative;
+    background: transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.overlay-name {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+}
+
+.planet-scroll {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+}
+
+.planet-item {
+    text-align: center;
+}
+
+.planet-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.meteor-animation-box {
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0, 0, 20, 0.3);
+}
+
+.meteor-info {
+    margin-top: 10px;
+}
+
+/* Favorites */
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.fav-card {
+    background: var(--bg-glass-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-glass);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.fav-card:hover {
+    transform: translateY(-2px);
+}
+
+.fav-temp {
+    font-weight: 600;
+    font-size: 1.2rem;
+}

@@ -1,0 +1,220 @@
+/* animations.css - Premium Weather Background Effects */
+
+/* Base Container */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+    /* Default Dark */
+    transition: background 1s ease;
+}
+
+[data-theme="light"] .background-container {
+    background: linear-gradient(to bottom, #38bdf8, #bae6fd);
+    /* Default Light */
+}
+
+/* Weather Specific Backgrounds */
+
+/* Clear (Day) */
+.background-container.clear {
+    background: linear-gradient(to bottom, #0ea5e9, #7dd3fc);
+}
+
+[data-theme="dark"] .background-container.clear {
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+}
+
+/* Clouds */
+.background-container.clouds {
+    background: linear-gradient(to bottom, #64748b, #94a3b8);
+}
+
+[data-theme="dark"] .background-container.clouds {
+    background: linear-gradient(to bottom, #1e293b, #334155);
+}
+
+/* Rain */
+.background-container.rain {
+    background: linear-gradient(to bottom, #334155, #475569);
+}
+
+[data-theme="dark"] .background-container.rain {
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+}
+
+/* Snow */
+.background-container.snow {
+    background: linear-gradient(to bottom, #cbd5e1, #e2e8f0);
+}
+
+[data-theme="dark"] .background-container.snow {
+    background: linear-gradient(to bottom, #1e293b, #334155);
+}
+
+/* =========================================
+   Particle Effects
+   ========================================= */
+
+/* Rain Drops */
+.rain-drop {
+    position: absolute;
+    top: -20px;
+    width: 1px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.6);
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+/* Snow Flakes */
+.snow-flake {
+    position: absolute;
+    top: -10px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: snowFall linear infinite;
+    filter: blur(1px);
+}
+
+@keyframes snowFall {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+
+    25% {
+        transform: translateY(25vh) translateX(15px);
+    }
+
+    50% {
+        transform: translateY(50vh) translateX(-15px);
+    }
+
+    75% {
+        transform: translateY(75vh) translateX(15px);
+    }
+
+    100% {
+        transform: translateY(100vh) translateX(0);
+    }
+}
+
+/* Clouds Animation */
+.cloud-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: url('../assets/clouds.png') repeat-x;
+    /* Ensure you have a cloud asset or use CSS shapes */
+    background-size: contain;
+    opacity: 0.4;
+    animation: drift 60s linear infinite;
+}
+
+@keyframes drift {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* Lightning */
+.lightning-flash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    animation: flash 0.2s ease-out;
+    pointer-events: none;
+}
+
+@keyframes flash {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    20% {
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Stars (Dark Mode Clear) */
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(2px 2px at 20px 30px, #eee, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+[data-theme="dark"] .stars {
+    opacity: 0.6;
+}
+
+/* Sun Rays (Light Mode Clear) */
+.sun-rays {
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+    animation: rotate 120s linear infinite;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+[data-theme="light"] .sun-rays {
+    opacity: 1;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
